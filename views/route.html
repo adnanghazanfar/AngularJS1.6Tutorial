@@ -1,0 +1,100 @@
+  <!doctype html>
+  <html lang="en" ng-app="routeApp">
+
+  <head>
+    <title>Angular JS Controller</title>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/angular-route.min.js"></script>
+    <script src="../scripts/route.js"></script>
+
+    <style>
+
+     .page {
+      width:80%;
+      margin: auto;
+    }
+
+    div{
+      margin :30px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+
+    div.container {
+      width: 100%;
+      border: 1px solid gray;
+    }
+
+    header, footer {
+      padding: 1em;
+      color: white;
+      background-color: black;
+      clear: left;
+      text-align: center;
+    }
+
+    nav {
+      float: left;
+      max-width: 160px;
+      margin: 0;
+      padding: 1em;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    nav ul a {
+      text-decoration: none;
+    }
+
+    article {
+      margin-left: 170px;
+      border-left: 1px solid gray;
+      padding: 1em;
+      overflow: hidden;
+    }
+    
+  </style>
+
+
+</head>
+
+<body>
+
+
+  <div class="container">
+
+    <header>
+     <h1>Angular Routing Application</h1>
+   </header>
+
+   <nav>
+    <ul>
+     <li><a href="../index.html">Main Page</a></li>
+     <li><a ng-href="#!/home">Home</a></li>
+     <li><a ng-href="#!/employee">Employee</a></li>
+     <li><a ng-href="#!/student">Students</a></li>
+   </ul>
+ </nav>
+
+ <article><ng-view></ng-view></article>
+
+ <footer>Copyright &copy; Learning Angular</footer>
+
+</div>
+
+</body>
+
+</html>

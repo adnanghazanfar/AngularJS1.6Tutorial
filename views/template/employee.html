@@ -1,0 +1,20 @@
+<div ng-controller="employeeController as vm">
+	<table class="table">
+	    <thead>
+	        <tr>
+	            <th>Name</th>
+	            <th>Date of Birth</th>
+	            <th>Gender</th>
+	            <th>Salary(number)</th>
+	            <th>Salary(currency)</th>
+	        </tr>
+	    </thead>
+	    <tr ng-repeat="employee in vm.employees">
+	        <td>{{employee.name | uppercase}}</td>
+	        <td>{{employee.dob | date:'dd/MMMM/yyyy'}}</td>
+	        <td>{{employee.gender}}</td>
+	        <td>{{employee.salary | number}}</td>
+	        <td>{{employee.salary | currency:'PKR'}}</td>
+	    </tr>
+	</table>
+</div>

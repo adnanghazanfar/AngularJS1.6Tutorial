@@ -1,0 +1,14 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="student in vm.students | limitTo:vm.pageSize">
+        <td>{{student.Name | uppercase}}</td>
+        <td>{{student.City}}</td>
+        <td>{{student.Country}}</td>
+    </tr>
+</table>

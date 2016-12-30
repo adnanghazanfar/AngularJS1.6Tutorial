@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+
+<head>
+  <title>Angular JS Controller</title>
+  <script src="../scripts/angular.min.js"></script>
+  <script src="../scripts/survey.js"></script>
+
+  <style>
+
+     .page {
+      width:80%;
+      margin: auto;
+    }
+
+    .table {
+      width:100%;
+      margin: auto;
+    }
+  
+  </style>
+
+
+</head>
+
+<body>
+
+  <div  class="page" ng-controller="commonController as controller">
+    <div>
+      <h1>{{controller.title}}</h1>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Likes</th>
+          <th>Dislikes</th>
+          <th>*</th>
+          <th>*</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="technology in controller.technologies">
+        <td>{{technology.name | uppercase}}</td>
+        <td>{{technology.likes}}</td>
+        <td>{{technology.dislikes}}</td>
+        <td><input type="button" ng-click="controller.like(technology)" value="Like" /></td>
+        <td><input type="button" ng-click="controller.dislike(technology)" value="Dislike" /></td>
+      </tr>
+    </table>
+  </div>
+
+  <a href="../index.html">Main Page</a>
+
+</body>
+
+</html>

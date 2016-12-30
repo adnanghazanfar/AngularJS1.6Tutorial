@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th ng-show="hideSalaryInNumber">Salary(number)</th>
+            <th>Salary(currency)</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="employee in vm.employees | filter:vm.search | orderBy:'name':true | limitTo:vm.pageSize">
+        <td>{{employee.name | uppercase}}</td>
+        <td>{{employee.dob | date:'dd/MMMM/yyyy'}}</td>
+        <td>{{employee.gender | genderFilter}}</td>
+        <td ng-show="hideSalaryInNumber">{{employee.salary | number}}</td>
+        <td>{{employee.salary | currency:'PKR'}}</td>
+    </tr>
+</table>

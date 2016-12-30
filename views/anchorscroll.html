@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+
+<head>
+  <title>Angular JS Controller</title>
+  <script src="../scripts/angular.min.js"></script>
+  <script src="../scripts/anchorscroll.js"></script>
+
+  <style>
+
+    div {
+        margin-top: 20px;
+    }
+
+    .page {
+      width:80%;
+      margin: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+      
+  </style>
+
+
+</head>
+
+<body>
+
+  <div ng-controller="commonController as vm">
+    <button id="top" ng-click="vm.scrollTo('bottom')">Go to bottom</button>
+
+    <div style="height:800px"></div>
+
+    <button id="bottom" ng-click="vm.scrollTo('top')">Go to TOP</button>
+  </div>
+
+  <a href="../index.html">Main Page</a>
+</body>
+
+</html>

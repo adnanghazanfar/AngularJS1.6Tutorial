@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+
+<head>
+  <title>Angular JS Controller</title>
+  <script src="../scripts/angular.min.js"></script>
+  <script src="../scripts/employee.js"></script>
+
+  <style>
+
+    div {
+        margin-top: 20px;
+    }
+
+    .page {
+      width:80%;
+      margin: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+      
+  </style>
+
+
+</head>
+
+<body>
+
+  <div class="page" ng-controller="commonController as vm">
+    <div>
+      <h1>{{vm.title}}</h1>
+    </div>
+    <div>No of Records to display : <input type="number" ng-model="vm.pageSize" max="10" min="0"></div>
+    <div>Search Text : <input type="text" ng-model="vm.searchText"></div>
+    <div ng-init="hideSalaryInNumber  = true">Salary In Number : <input type="checkbox" ng-model="hideSalaryInNumber"></div>
+    <div ng-init="viewType = 'employeeTable.html'">View Employee :
+      <select ng-model="viewType">
+        <option value="employeeTable.html">Table</option>
+        <option value="employeeList.html">List</option>
+      </select>
+
+      <div>
+        <div ng-include="viewType"></div>
+      </div>
+    </div>
+
+    <a href="../index.html">Main Page</a>
+
+  </div>
+
+</body>
+
+</html>
