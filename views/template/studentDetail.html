@@ -1,0 +1,34 @@
+<div>
+
+<div ng-show="vm.error != null">
+		{{vm.error}}
+	</div>
+	<div ng-show="vm.error == null">
+		<table class="table">
+			<tr>
+				<td>Name</td>
+				<td>{{vm.student.Name | uppercase}}</td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td>{{vm.student.City | uppercase}}</td>
+			</tr>
+			<tr>
+				<td>Country</td>
+				<td>{{vm.student.Country | uppercase}}</td>
+			</tr>
+			<tr>
+				<td>Age</td>
+				<td>{{vm.student.Age | uppercase}}</td>
+			</tr>
+			<tr>
+				<td>Skills</td>
+				<td>{{vm.student.Skills | uppercase}}</td>
+			</tr>
+			<tr>
+				<td>Comany</td>
+				<td>{{vm.student.Company | uppercase}}</td>
+			</tr>
+		</table>
+	</div>
+</div>

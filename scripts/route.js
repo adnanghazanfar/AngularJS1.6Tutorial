@@ -4,17 +4,23 @@
     var routeApp = angular.module('routeApp', ['ngRoute'
         ]);
 
-
     routeApp.config(["$routeProvider", function ($routeProvider) {
         $routeProvider.when("/home", {
             templateUrl: "template/home.html",
-            controller: "homeController"
-        }).when("/employee", {
+            controller: "homeController",
+            controllerAs: 'vm'
+        }).when("/employees", {
             templateUrl: "template/employee.html",
-            controller: "employeeController"
-        }).when("/student", {
+            controller: "employeeController",
+            controllerAs: 'vm'
+        }).when("/students", {
             templateUrl: "template/student.html",
-            controller: "studentController"
+            controller: "studentController",
+            controllerAs: 'vm'
+        }).when("/students/:id", {
+            templateUrl: "template/studentDetail.html",
+            controller: "studentDetailController",
+            controllerAs: 'vm'
         }).otherwise({
             template: "Don't have any routes associated with this"
         });
@@ -65,12 +71,34 @@
 
         function ControllerController(studentService) {
             var vm = this;
-            studentService.exposedFn().then(function (response) {
+            studentService.getAllStudents().then(function (response) {
                 vm.students = response.data.records;
             });
 
         }
     })();
+
+
+
+    (function() {
+        'use strict';
+
+        routeApp
+        .controller('studentDetailController', ControllerController);
+
+        ControllerController.inject = ['studentService'];
+
+        function ControllerController(studentService) {
+            var vm = this;
+            studentService.getStudentById().then(function (response) {
+                vm.student = response.data;
+            }, function(reason){
+                vm.error = 'Unable to get details please contact system admin.'
+            });
+
+        }
+    })();
+
 
     (function () {
         'use strict';
@@ -78,16 +106,25 @@
         routeApp.service('studentService', Service);
 
         Service.init = ['$http'];;
-        function Service($http) {
-            this.exposedFn = exposedFn;
-            function exposedFn() {
-                return $http.get('http://www.w3schools.com/angular/customers.php');
+        function Service($http, $routeParams) {
+            
+            this.getAllStudents = getAllStudents;
+            
+            this.getStudentById = getStudentById;
+
+            function getStudentById() {
+                return $http.get('/AngularJS-1.6/data/json/customers/'+$routeParams.id+'.json');
             }
+
+            function getAllStudents() {
+                return $http.get('/AngularJS-1.6/data/json/customers.json');
+            }
+
+
         }
 
 
-    })();
-
+    })();    
 
 
 })();
