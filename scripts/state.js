@@ -1,33 +1,47 @@
 (function () {
     'use strict';
 
-    var routeApp = angular.module('routeApp', ['ngRoute'
+    var routeApp = angular.module('routeApp', ['ui.router'
         ]);
 
-    routeApp.config(["$routeProvider", function ($routeProvider) {
+    routeApp.inject =['ui.router'];
 
+    routeApp.config(["$stateProvider","$urlRouterProvider","$urlMatcherFactoryProvider", function ($stateProvider, $urlRouterProvider,$urlMatcherFactoryProvider) {
 
-        $routeProvider.when("/home", {
-            templateUrl: "template/home.html",
+        $urlRouterProvider.otherwise('/home');
+        $urlMatcherFactoryProvider.caseInsensitive(true);
+
+        $stateProvider.state("home", {
+            url:"/home",
+            templateUrl: "template/homeState.html",
             controller: "homeController",
-            controllerAs: 'vm'
-            controllerAs: 'vm'
-            controllerAs: 'vm'
-        }).when("/employees", {
+            controllerAs: 'vm',
+            data: {
+                variable1 : 'Home 1',
+                variable2 : 'Home 2'
+            }
+        }).state("employees", {
+            url:"/employees",
             templateUrl: "template/employee.html",
             controller: "employeeController",
             controllerAs: 'vm'
-        }).when("/students", {
-            templateUrl: "template/student.html",
+        }).state("students", {
+            url:"/students",
+            templateUrl: "template/studentState.html",
             controller: "studentController",
-            controllerAs: 'vm'
-        }).when("/students/:id", {
+            controllerAs: 'vm',
+            data: {
+                variable1 : 'Student 1',
+                variable2 : 'Student 2'
+            }
+        }).state("studentDetail", {
+            url:"/students/:id",
             templateUrl: "template/studentDetail.html",
             controller: "studentDetailController",
             controllerAs: 'vm'
-        }).otherwise({
-            template: "Don't have any routes associated with this"
         });
+
+
     }]);
 
     (function() {
@@ -36,11 +50,19 @@
         routeApp
         .controller('homeController', ControllerController);
 
-        ControllerController.inject =['$rootScope'];
-        function ControllerController($rootScope) {
+        ControllerController.inject =['$rootScope','$state'];
+        function ControllerController($rootScope,$state) {
             var vm = this;
             vm.message = 'Route Application';
             $rootScope.message = 'Root scope properties'
+            vm.homeVariable1 = $state.current.data.variable1;
+            vm.homeVariable2 = $state.current.data.variable2;
+            vm.studentVariable1 = $state.get("students").data.variable1;
+            vm.studentVariable2 = $state.get("students").data.variable2;
+
+            $state.current.data.variable1 = 'changed';
+
+            // $state.go("studentDetail",{id:1});
 
             $rootScope.$on('$routeChangeStart',function(event,next,current){
                 if(!confirm('Do you want to navigate')){
@@ -81,10 +103,18 @@
         routeApp
         .controller('studentController', ControllerController);
 
-        ControllerController.inject = ['studentService'];
+        ControllerController.inject = ['$state','studentService'];
 
-        function ControllerController(studentService) {
+        function ControllerController($state, studentService) {
             var vm = this;
+
+            vm.studentVariable1 = $state.current.data.variable1;
+            vm.studentVariable2 = $state.current.data.variable2;
+            vm.homeVariable1 = $state.get("home").data.variable1;
+            vm.homeVariable2 = $state.get("home").data.variable2;
+
+
+            
             studentService.getAllStudents().then(function (response) {
                 vm.students = response.data.records;
             });
@@ -120,13 +150,13 @@
         routeApp.service('studentService', Service);
 
         Service.init = ['$http'];;
-        function Service($http, $routeParams) {
+        function Service($http, $stateParams) {
 
             this.getAllStudents = getAllStudents;
             this.getStudentById = getStudentById;
 
             function getStudentById() {
-                return $http.get('/AngularJS-1.6/data/json/customers/'+$routeParams.id+'.json');
+                return $http.get('/AngularJS-1.6/data/json/customers/'+$stateParams.id+'.json');
             }
 
             function getAllStudents() {
@@ -135,10 +165,6 @@
 
 
         }
-        }
-        }
-
-
     })();    
 
 

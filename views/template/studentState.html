@@ -1,0 +1,30 @@
+<div>
+    <h4>{{message}}</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="student in vm.students">
+            <td><a ui-sref="studentDetail({id:student.Id})">{{student.Name | uppercase}}</a></td>
+            <td>{{student.City}}</td>
+            <td>{{student.Country}}</td>
+        </tr>
+    </table>
+
+    <fieldset>
+        <legend>Home</legend>
+        Variable 1 : {{vm.homeVariable1}}<br>
+        Variable 1 : {{vm.homeVariable2}}<br>
+    </fieldset>
+
+
+    <fieldset>
+        <legend>Student</legend>
+        Variable 1 : {{vm.studentVariable1}}<br>
+        Variable 1 : {{vm.studentVariable2}}<br>
+    </fieldset>
+</div>
