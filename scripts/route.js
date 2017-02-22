@@ -11,8 +11,6 @@
             templateUrl: "template/home.html",
             controller: "homeController",
             controllerAs: 'vm'
-            controllerAs: 'vm'
-            controllerAs: 'vm'
         }).when("/employees", {
             templateUrl: "template/employee.html",
             controller: "employeeController",
